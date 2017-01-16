@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule, Http, RequestOptions} from '@angular/http';
 import {RouterModule, RouterOutletMap} from '@angular/router';
 
@@ -18,6 +18,9 @@ import { PlayersComponent } from './admin/players/players.component';
 import { TournamentsComponent } from './admin/tournaments/tournaments.component';
 import { TournamentDetailComponent } from './admin/tournaments/tournament-detail/tournament-detail.component';
 import { TournamentAddComponent } from './admin/tournaments/tournament-add/tournament-add.component';
+import { PlayerAddComponent } from './admin/players/player-add/player-add.component';
+import { PlayerEditComponent } from './admin/players/player-edit/player-edit.component';
+import { PlayerDetailComponent } from './admin/players/player-detail/player-detail.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -39,13 +42,17 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PlayersComponent,
     TournamentsComponent,
     TournamentDetailComponent,
-    TournamentAddComponent
+    TournamentAddComponent,
+    PlayerAddComponent,
+    PlayerEditComponent,
+    PlayerDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    WuHuWebAppRoutingModule
+    WuHuWebAppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     HttpAuthenticatedService,

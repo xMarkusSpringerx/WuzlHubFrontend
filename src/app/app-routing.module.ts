@@ -10,6 +10,9 @@ import {PlayersComponent} from "./admin/players/players.component";
 import {TournamentsComponent} from "./admin/tournaments/tournaments.component";
 import {TournamentAddComponent} from "./admin/tournaments/tournament-add/tournament-add.component";
 import {TournamentDetailComponent} from "./admin/tournaments/tournament-detail/tournament-detail.component";
+import {PlayerDetailComponent} from "./admin/players/player-detail/player-detail.component";
+import {PlayerAddComponent} from "./admin/players/player-add/player-add.component";
+import {PlayerEditComponent} from "./admin/players/player-edit/player-edit.component";
 
 const routes: Routes = [
 
@@ -35,8 +38,12 @@ const routes: Routes = [
       /* Players */
       { path: 'players',
         component: PlayersComponent},
-
-
+      { path: 'players/add',
+        component: PlayerAddComponent},
+      { path: 'players/:playerId',
+        component: PlayerDetailComponent},
+      { path: 'tournaments/:playerId/edit',
+        component: PlayerEditComponent},
 
       /* Tournaments*/
       { path: 'tournaments',

@@ -1,0 +1,93 @@
+<form class="form-horizontal" [formGroup]="addForm" (ngSubmit)="addPlayer($event)">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Vorname</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Vorname" formControlName="firstname">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Nachname</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Nachname" formControlName="lastname">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Username" formControlName="username">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Passwort</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Passwort" formControlName="password">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">E-Mail</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="E-Mail" formControlName="email">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">E-Mail</label>
+    <select formControlName="role">
+      <option value={{role.id}} *ngFor="let role of roles; let i = index">
+        {{role.name}}
+      </option>
+    </select>
+  </div>
+
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceMonday"> Montag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceTuesday"> Dienstag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceWednesday"> Mittwoch
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceThursday"> Donnerstag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceFriday"> Freitag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceSaturday"> Samstag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceSunday"> Sonntag
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Sign in</button>
+    </div>
+  </div>
+</form>

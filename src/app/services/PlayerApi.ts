@@ -39,12 +39,15 @@ export class PlayerApi {
     protected basePath = environment.baseApiPath;
     public defaultHeaders : Headers = new Headers();
 
+
     public players : [Player];
 
     constructor(protected http: Http, protected authHttp: AuthHttp, @Optional() basePath: string) {
         if (basePath) {
             this.basePath = basePath;
         }
+
+      this.defaultHeaders.append("Content-Type", "application/json");
     }
 
     /**

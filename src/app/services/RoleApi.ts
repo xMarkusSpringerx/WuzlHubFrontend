@@ -78,7 +78,7 @@ export class RoleApi {
      *
      *
      */
-    public RoleGet (extraHttpRequestParams?: any ) : Observable<{}> {
+    public RoleGet (extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Role';
 
         let queryParameters = new URLSearchParams();
