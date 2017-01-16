@@ -211,7 +211,7 @@ export class TournamentApi {
      *
      *
      */
-    public TournamentGet (extraHttpRequestParams?: any ) : Observable<{}> {
+    public TournamentGet (extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Tournament';
 
         let queryParameters = new URLSearchParams();

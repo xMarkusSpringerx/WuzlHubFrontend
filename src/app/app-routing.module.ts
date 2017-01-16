@@ -6,6 +6,10 @@ import {DashboardComponent} from "./admin/dashboard/dashboard.component";
 import {AuthGuard} from "./auth-guard.service";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {OverviewComponent} from "./overview/overview.component";
+import {PlayersComponent} from "./admin/players/players.component";
+import {TournamentsComponent} from "./admin/tournaments/tournaments.component";
+import {TournamentAddComponent} from "./admin/tournaments/tournament-add/tournament-add.component";
+import {TournamentDetailComponent} from "./admin/tournaments/tournament-detail/tournament-detail.component";
 
 const routes: Routes = [
 
@@ -26,7 +30,21 @@ const routes: Routes = [
 
       /* Dashboard */
       { path: 'dashboard',
-        component: DashboardComponent}
+        component: DashboardComponent},
+
+      /* Players */
+      { path: 'players',
+        component: PlayersComponent},
+
+
+
+      /* Tournaments*/
+      { path: 'tournaments',
+        component: TournamentsComponent},
+      { path: 'tournaments/add',
+        component: TournamentAddComponent},
+      { path: 'tournaments/:tournamentId',
+        component: TournamentDetailComponent}
     ]
   },
   /* DEFAULT */

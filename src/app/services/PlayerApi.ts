@@ -39,6 +39,8 @@ export class PlayerApi {
     protected basePath = environment.baseApiPath;
     public defaultHeaders : Headers = new Headers();
 
+    public players : [Player];
+
     constructor(protected http: Http, protected authHttp: AuthHttp, @Optional() basePath: string) {
         if (basePath) {
             this.basePath = basePath;
@@ -105,6 +107,7 @@ export class PlayerApi {
                     return response.json();
                 }
             });
+
     }
 
     /**
@@ -330,7 +333,7 @@ export class PlayerApi {
      *
      *
      */
-    public PlayerGet (extraHttpRequestParams?: any ) : Observable<{}> {
+    public PlayerGet (extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Player';
 
         let queryParameters = new URLSearchParams();

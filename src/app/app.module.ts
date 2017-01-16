@@ -14,6 +14,10 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OverviewComponent } from './overview/overview.component';
 import {AuthGuard} from "./auth-guard.service";
+import { PlayersComponent } from './admin/players/players.component';
+import { TournamentsComponent } from './admin/tournaments/tournaments.component';
+import { TournamentDetailComponent } from './admin/tournaments/tournament-detail/tournament-detail.component';
+import { TournamentAddComponent } from './admin/tournaments/tournament-add/tournament-add.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -31,7 +35,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AdminComponent,
     DashboardComponent,
     PageNotFoundComponent,
-    OverviewComponent
+    OverviewComponent,
+    PlayersComponent,
+    TournamentsComponent,
+    TournamentDetailComponent,
+    TournamentAddComponent
   ],
   imports: [
     BrowserModule,
