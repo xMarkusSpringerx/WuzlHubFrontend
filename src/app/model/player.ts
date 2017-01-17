@@ -22,7 +22,7 @@ export class Player {
 export namespace Player {
 
   export enum AttendanceEnum {
-    Sunday = <any> 'Sunday',
+    Sunday = <any> true,
     Saturday = <any> 'Saturday',
     Friday = <any> 'Friday',
     Thursday = <any> 'Thursday',

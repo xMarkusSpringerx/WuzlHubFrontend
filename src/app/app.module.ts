@@ -19,8 +19,9 @@ import { TournamentsComponent } from './admin/tournaments/tournaments.component'
 import { TournamentDetailComponent } from './admin/tournaments/tournament-detail/tournament-detail.component';
 import { TournamentAddComponent } from './admin/tournaments/tournament-add/tournament-add.component';
 import { PlayerAddComponent } from './admin/players/player-add/player-add.component';
-import { PlayerEditComponent } from './admin/players/player-edit/player-edit.component';
 import { PlayerDetailComponent } from './admin/players/player-detail/player-detail.component';
+import { ChartsModule } from "ng2-charts";
+import {SimpleNotificationsModule} from "angular2-notifications";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -44,7 +45,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TournamentDetailComponent,
     TournamentAddComponent,
     PlayerAddComponent,
-    PlayerEditComponent,
     PlayerDetailComponent
   ],
   imports: [
@@ -52,7 +52,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     WuHuWebAppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule,
+    SimpleNotificationsModule
   ],
   providers: [
     HttpAuthenticatedService,

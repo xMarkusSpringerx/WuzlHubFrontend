@@ -1,3 +1,144 @@
-<p>
-  player-detail works!
-</p>
+<div *ngIf="editModus == false" class="col-md-12 col-lg-12  toppad">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{player.firstName}} {{player.lastName}}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3 col-lg-3 " align="center"><img alt="User Pic"
+                                                            src={{player.picturePath}}
+                                                            class="img-circle img-responsive"></div>
+
+        <div class=" col-md-9 col-lg-9 ">
+          <table class="table table-user-information">
+            <tbody>
+            <tr>
+              <td>Username:</td>
+              <td>{{player.userName}}</td>
+            </tr>
+            <tr>
+              <td>E-Mail</td>
+              <td>{{player.email}}</td>
+            </tr>
+            <tr>
+              <td>Rolle</td>
+              <td>{{player.roleId}}</td>
+            </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="pull-right">
+        <div (click)="editPlayer()" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></div>
+        <div class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<form class="form-horizontal" [formGroup]="addForm" (ngSubmit)="updatePlayer($event)" *ngIf="editModus">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Vorname</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Vorname" value={{player.firstName}} formControlName="firstname">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Nachname</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Nachname" value={{player.lastName}} formControlName="lastname">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Username</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Username" value={{player.userName}} formControlName="username">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Passwort</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Passwort" formControlName="password">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">E-Mail</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="E-Mail" value={{player.email}} formControlName="email">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Rolle</label>
+    <select formControlName="role">
+      <option value={{role.id}} *ngFor="let role of roles; let i = index">
+        {{role.name}}
+      </option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <input type="file" (change)="fileChangeEvent($event)" formControlName="file" placeholder="Upload file..." />
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceMonday"> Montag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceTuesday"> Dienstag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceWednesday"> Mittwoch
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceThursday"> Donnerstag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceFriday"> Freitag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceSaturday"> Samstag
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="attendanceSunday"> Sonntag
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Absenden</button>
+    </div>
+  </div>
+</form>

@@ -36,352 +36,377 @@ import {AuthHttp} from "angular2-jwt";
 
 @Injectable()
 export class PlayerApi {
-    protected basePath = environment.baseApiPath;
-    public defaultHeaders : Headers = new Headers();
+  protected basePath = environment.baseApiPath;
+  public defaultHeaders: Headers = new Headers();
 
 
-    public players : [Player];
+  public players: [Player];
 
-    constructor(protected http: Http, protected authHttp: AuthHttp, @Optional() basePath: string) {
-        if (basePath) {
-            this.basePath = basePath;
+  constructor(protected http: Http, protected authHttp: AuthHttp, @Optional() basePath: string) {
+    if (basePath) {
+      this.basePath = basePath;
+    }
+
+    this.defaultHeaders.append("Content-Type", "application/json");
+  }
+
+  /**
+   *
+   *
+   * @param playerId
+   */
+  public PlayerByPlayerIdDelete(playerId: number, extraHttpRequestParams?: any): Observable<{}> {
+    const path = this.basePath + '/api/Player/{playerId}'
+        .replace('{' + 'playerId' + '}', String(playerId));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'playerId' is not null or undefined
+    if (playerId === null || playerId === undefined) {
+      throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdDelete.');
+    }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'DELETE',
+      headers: headerParams,
+      search: queryParameters
+    };
+
+    return this.authHttp.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
+      });
+  }
 
-      this.defaultHeaders.append("Content-Type", "application/json");
+  /**
+   *
+   *
+   * @param playerId
+   */
+  public PlayerByPlayerIdGet(playerId: number, extraHttpRequestParams?: any) {
+    const path = this.basePath + '/api/Player/{playerId}'
+        .replace('{' + 'playerId' + '}', String(playerId));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'playerId' is not null or undefined
+    if (playerId === null || playerId === undefined) {
+      throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdGet.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param playerId
-     */
-    public PlayerByPlayerIdDelete (playerId: number, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/{playerId}'
-            .replace('{' + 'playerId' + '}', String(playerId));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'playerId' is not null or undefined
-        if (playerId === null || playerId === undefined) {
-            throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdDelete.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'DELETE',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
 
-        return this.authHttp.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+  }
+
+  /**
+   *
+   *
+   * @param playerId
+   */
+  public PlayerByPlayerIdProfilepicGet(playerId: number, extraHttpRequestParams?: any): Observable<{}> {
+    const path = this.basePath + '/api/Player/{playerId}/profilepic'
+        .replace('{' + 'playerId' + '}', String(playerId));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'playerId' is not null or undefined
+    if (playerId === null || playerId === undefined) {
+      throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdProfilepicGet.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param playerId
-     */
-    public PlayerByPlayerIdGet (playerId: number, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/{playerId}'
-            .replace('{' + 'playerId' + '}', String(playerId));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'playerId' is not null or undefined
-        if (playerId === null || playerId === undefined) {
-            throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdGet.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+  /**
+   *
+   *
+   * @param playerId
+   */
+  public PlayerByPlayerIdProfilepicPost(playerId: number, extraHttpRequestParams?: any) {
+    const path = this.basePath + '/api/Player/{playerId}/profilepic'
+        .replace('{' + 'playerId' + '}', String(playerId));
 
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'playerId' is not null or undefined
+    if (playerId === null || playerId === undefined) {
+      throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdProfilepicPost.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'POST',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param playerId
-     */
-    public PlayerByPlayerIdProfilepicGet (playerId: number, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/{playerId}/profilepic'
-            .replace('{' + 'playerId' + '}', String(playerId));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'playerId' is not null or undefined
-        if (playerId === null || playerId === undefined) {
-            throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdProfilepicGet.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
+  public UploadProfilePic(playerId, file: File) {
+    const path = this.basePath + '/api/Player/{playerId}/profilepic'
+        .replace('{' + 'playerId' + '}', String(playerId));
+    return Observable.create(observer => {
+      let formData: FormData = new FormData(),
+        xhr: XMLHttpRequest = new XMLHttpRequest();
 
-    /**
-     *
-     *
-     * @param playerId
-     */
-    public PlayerByPlayerIdProfilepicPost (playerId: number, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/{playerId}/profilepic'
-            .replace('{' + 'playerId' + '}', String(playerId));
+      formData.append("file", file);
 
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'playerId' is not null or undefined
-        if (playerId === null || playerId === undefined) {
-            throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdProfilepicPost.');
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            observer.next(JSON.parse(xhr.response));
+            observer.complete();
+          } else {
+            observer.error(xhr.response);
+          }
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'POST',
-            headers: headerParams,
-            search: queryParameters
-        };
+      };
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+      xhr.open('POST', path, true);
+      xhr.send(formData);
+    });
+  }
+
+  /**
+   *
+   *
+   * @param playerId
+   * @param player
+   */
+  public PlayerByPlayerIdPut(playerId: number, player?: Player, extraHttpRequestParams?: any) {
+    const path = this.basePath + '/api/Player/{playerId}'
+        .replace('{' + 'playerId' + '}', String(playerId));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'playerId' is not null or undefined
+    if (playerId === null || playerId === undefined) {
+      throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdPut.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'PUT',
+      headers: headerParams,
+      search: queryParameters
+    };
+    requestOptions.body = JSON.stringify(player);
 
-    /**
-     *
-     *
-     * @param playerId
-     * @param player
-     */
-    public PlayerByPlayerIdPut (playerId: number, player?: Player, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/{playerId}'
-            .replace('{' + 'playerId' + '}', String(playerId));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'playerId' is not null or undefined
-        if (playerId === null || playerId === undefined) {
-            throw new Error('Required parameter playerId was null or undefined when calling apiPlayerByPlayerIdPut.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'PUT',
-            headers: headerParams,
-            search: queryParameters
-        };
-        requestOptions.body = JSON.stringify(player);
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+  /**
+   *
+   *
+   * @param attendance
+   */
+  public PlayerFindbyattendanceByAttendanceGet(attendance: string, extraHttpRequestParams?: any): Observable<{}> {
+    const path = this.basePath + '/api/Player/findbyattendance/{attendance}'
+        .replace('{' + 'attendance' + '}', String(attendance));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'attendance' is not null or undefined
+    if (attendance === null || attendance === undefined) {
+      throw new Error('Required parameter attendance was null or undefined when calling apiPlayerFindbyattendanceByAttendanceGet.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param attendance
-     */
-    public PlayerFindbyattendanceByAttendanceGet (attendance: string, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/findbyattendance/{attendance}'
-            .replace('{' + 'attendance' + '}', String(attendance));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'attendance' is not null or undefined
-        if (attendance === null || attendance === undefined) {
-            throw new Error('Required parameter attendance was null or undefined when calling apiPlayerFindbyattendanceByAttendanceGet.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+  /**
+   *
+   *
+   * @param email
+   */
+  public PlayerFindbyemailByEmailGet(email: string, extraHttpRequestParams?: any): Observable<Array<Player>> {
+    const path = this.basePath + '/api/Player/findbyemail/{email}'
+        .replace('{' + 'email' + '}', String(email));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'email' is not null or undefined
+    if (email === null || email === undefined) {
+      throw new Error('Required parameter email was null or undefined when calling apiPlayerFindbyemailByEmailGet.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param email
-     */
-    public PlayerFindbyemailByEmailGet (email: string, extraHttpRequestParams?: any ) : Observable<Array<Player>> {
-        const path = this.basePath + '/api/Player/findbyemail/{email}'
-            .replace('{' + 'email' + '}', String(email));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'email' is not null or undefined
-        if (email === null || email === undefined) {
-            throw new Error('Required parameter email was null or undefined when calling apiPlayerFindbyemailByEmailGet.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+  /**
+   *
+   *
+   * @param roleId
+   */
+  public PlayerFindbyroleByRoleIdGet(roleId: number, extraHttpRequestParams?: any): Observable<{}> {
+    const path = this.basePath + '/api/Player/findbyrole/{roleId}'
+        .replace('{' + 'roleId' + '}', String(roleId));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'roleId' is not null or undefined
+    if (roleId === null || roleId === undefined) {
+      throw new Error('Required parameter roleId was null or undefined when calling apiPlayerFindbyroleByRoleIdGet.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param roleId
-     */
-    public PlayerFindbyroleByRoleIdGet (roleId: number, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/findbyrole/{roleId}'
-            .replace('{' + 'roleId' + '}', String(roleId));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'roleId' is not null or undefined
-        if (roleId === null || roleId === undefined) {
-            throw new Error('Required parameter roleId was null or undefined when calling apiPlayerFindbyroleByRoleIdGet.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
+  /**
+   *
+   *
+   * @param username
+   */
+  public PlayerFindbyusernameByUsernameGet(username: string, extraHttpRequestParams?: any): Observable<{}> {
+    const path = this.basePath + '/api/Player/findbyusername/{username}'
+        .replace('{' + 'username' + '}', String(username));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'username' is not null or undefined
+    if (username === null || username === undefined) {
+      throw new Error('Required parameter username was null or undefined when calling apiPlayerFindbyusernameByUsernameGet.');
     }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-    /**
-     *
-     *
-     * @param username
-     */
-    public PlayerFindbyusernameByUsernameGet (username: string, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player/findbyusername/{username}'
-            .replace('{' + 'username' + '}', String(username));
-
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        // verify required parameter 'username' is not null or undefined
-        if (username === null || username === undefined) {
-            throw new Error('Required parameter username was null or undefined when calling apiPlayerFindbyusernameByUsernameGet.');
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
         }
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
+  /**
+   *
+   *
+   */
+  public PlayerGet(extraHttpRequestParams?: any) {
+    const path = this.basePath + '/api/Player';
 
-    /**
-     *
-     *
-     */
-    public PlayerGet (extraHttpRequestParams?: any ) {
-        const path = this.basePath + '/api/Player';
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
 
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        let requestOptions: RequestOptionsArgs = {
-            method: 'GET',
-            headers: headerParams,
-            search: queryParameters
-        };
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
+        }
+      });
+  }
 
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
+  /**
+   *
+   *
+   * @param player
+   */
+  public PlayerPost(player?: Player, extraHttpRequestParams?: any) {
+    const path = this.basePath + '/api/Player';
 
-    /**
-     *
-     *
-     * @param player
-     */
-    public PlayerPost (player?: Player, extraHttpRequestParams?: any ) : Observable<{}> {
-        const path = this.basePath + '/api/Player';
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    let requestOptions: RequestOptionsArgs = {
+      method: 'POST',
+      headers: headerParams,
+      search: queryParameters
+    };
+    requestOptions.body = JSON.stringify(player);
 
-        let queryParameters = new URLSearchParams();
-        let headerParams = this.defaultHeaders;
-        let requestOptions: RequestOptionsArgs = {
-            method: 'POST',
-            headers: headerParams,
-            search: queryParameters
-        };
-        requestOptions.body = JSON.stringify(player);
-
-        return this.http.request(path, requestOptions)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
+        }
+      });
+  }
 
 }

@@ -12,7 +12,6 @@ import {TournamentAddComponent} from "./admin/tournaments/tournament-add/tournam
 import {TournamentDetailComponent} from "./admin/tournaments/tournament-detail/tournament-detail.component";
 import {PlayerDetailComponent} from "./admin/players/player-detail/player-detail.component";
 import {PlayerAddComponent} from "./admin/players/player-add/player-add.component";
-import {PlayerEditComponent} from "./admin/players/player-edit/player-edit.component";
 
 const routes: Routes = [
 
@@ -24,7 +23,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
 
     children: [
       /* map default admin path to dashboard */
@@ -42,9 +41,6 @@ const routes: Routes = [
         component: PlayerAddComponent},
       { path: 'players/:playerId',
         component: PlayerDetailComponent},
-      { path: 'tournaments/:playerId/edit',
-        component: PlayerEditComponent},
-
       /* Tournaments*/
       { path: 'tournaments',
         component: TournamentsComponent},
