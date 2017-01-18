@@ -57,6 +57,7 @@ export class PlayerAddComponent implements OnInit {
     this.roleService.RoleGet().subscribe(
       (result) => {
         this.roles = result;
+        console.log(this.roles);
       },
       (error) => {
         console.log(error);

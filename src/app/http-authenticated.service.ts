@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgModule} from '@angular/core';
 import {Http, Headers, URLSearchParams, RequestOptions} from '@angular/http';
 import {environment} from "../environments/environment";
 import {tokenNotExpired, JwtHelper} from 'angular2-jwt';
@@ -11,7 +11,11 @@ export class HttpAuthenticatedService {
   public allHeaders: Headers;
   private baseApiUrl;
 
-  constructor(private http: Http, private router : Router) {
+
+
+  constructor(
+    private http: Http, private router : Router
+  ) {
     this.allHeaders = new Headers();
     this.baseApiUrl = environment.baseApiPath + "/api/login";
   }
@@ -43,6 +47,7 @@ export class HttpAuthenticatedService {
         }
 
       );
+
   }
 
   loggedIn() {
@@ -51,13 +56,36 @@ export class HttpAuthenticatedService {
 
   isAdmin() : boolean {
     var jwtHelper = new JwtHelper();
-    var token = jwtHelper.decodeToken(localStorage.getItem('id_token'));
+    if(localStorage.getItem('id_token')){
 
-    if(token.role == 'Administrator') {
-      return true;
+      var token = jwtHelper.decodeToken(localStorage.getItem('id_token'));
+
+      console.log(token);
+      if(token.role == "Administrator") {
+        return true;
+      }
+      return false;
+    } else {
+
+      return false;
     }
-    return false;
   }
+
+  getLoggedInUsername() {
+    var jwtHelper = new JwtHelper();
+    if(localStorage.getItem('id_token')){
+
+      var token = jwtHelper.decodeToken(localStorage.getItem('id_token'));
+
+      console.log(token);
+
+      return token.sub;
+    } else {
+      return "";
+    }
+  }
+
+
 
   logout() {
     localStorage.removeItem('id_token');

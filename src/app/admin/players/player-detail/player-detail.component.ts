@@ -9,6 +9,7 @@ import {AttendanceService} from "../../_shared/attendance.service";
 import {Role} from "../../../model/role";
 import {RoleApi} from "../../../services/RoleApi";
 import {Location} from '@angular/common';
+import {HttpAuthenticatedService} from "../../../http-authenticated.service";
 
 @Component({
   selector: 'app-player-detail',
@@ -20,6 +21,9 @@ export class PlayerDetailComponent implements OnInit {
 
   private player : Player = new Player;
   private editModus : boolean = false;
+  private isAdmin : boolean;
+  /* Logged in Username */
+  private username : string;
 
   private roles : [Role];
 
@@ -64,7 +68,8 @@ export class PlayerDetailComponent implements OnInit {
     private router: Router,
     private attendanceService: AttendanceService,
     private roleService : RoleApi,
-    private _location: Location
+    private _location: Location,
+    private adminService : HttpAuthenticatedService
   ) { }
 
 
@@ -134,6 +139,9 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isAdmin = this.adminService.isAdmin();
+    this.username = this.adminService.getLoggedInUsername();
+
     this.roleService.RoleGet().subscribe(
       (result) => {
         this.roles = result;

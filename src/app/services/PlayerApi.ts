@@ -331,7 +331,7 @@ export class PlayerApi {
    *
    * @param username
    */
-  public PlayerFindbyusernameByUsernameGet(username: string, extraHttpRequestParams?: any): Observable<{}> {
+  public PlayerFindbyusernameByUsernameGet(username: string, extraHttpRequestParams?: any) {
     const path = this.basePath + '/api/Player/findbyusername/{username}'
         .replace('{' + 'username' + '}', String(username));
 

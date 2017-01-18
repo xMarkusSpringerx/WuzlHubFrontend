@@ -3,6 +3,8 @@ import {PlayerApi} from "../../../services/PlayerApi";
 import {Validators, FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {TournamentApi} from "../../../services/TournamentApi";
 import {Tournament} from "../../../model/tournament";
+import {Router} from "@angular/router";
+import {NotificationsService} from "angular2-notifications";
 
 @Component({
   selector: 'app-tournament-add',
@@ -25,7 +27,10 @@ export class TournamentAddComponent implements OnInit {
 
   constructor(private playerService: PlayerApi,
               private tournamentService : TournamentApi,
-              public fb: FormBuilder,) {
+              public fb: FormBuilder,
+              private router : Router,
+              private notificationService : NotificationsService
+  ) {
   }
 
   ngOnInit() {
@@ -64,7 +69,6 @@ export class TournamentAddComponent implements OnInit {
         tournament.name = this.addForm.value.name;
         tournament.date = this.addForm.value.dateTime;
         tournament.countdownSeconds = this.addForm.value.countdownSeconds;
-
       }
     }
 
@@ -78,9 +82,11 @@ export class TournamentAddComponent implements OnInit {
             this.tournamentService.TournamentByTournamentIdCreatematchesByAmountGet(tournament.id, this.addForm.value.countMatches).subscribe(
               (result) => {
                 console.log(result);
+                this.router.navigate(['/admin/tournaments/', tournament.id]);
+                this.notificationService.success("Wuhu", "Tournament erfolgreich hinzugefügt");
               },
               (error) => {
-                console.log(error);
+                this.notificationService.error("Hmm", "Es gab ein Problem.");
               }
             )
           },

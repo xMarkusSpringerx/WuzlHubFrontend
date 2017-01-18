@@ -42,6 +42,7 @@ export class LiveResultApi {
         if (basePath) {
             this.basePath = basePath;
         }
+        this.defaultHeaders.append("Content-Type", "application/json");
     }
 
     /**

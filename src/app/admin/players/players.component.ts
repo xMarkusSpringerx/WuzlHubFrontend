@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PlayerApi} from "../../services/PlayerApi";
 import {Player} from "../../model/player";
+import {HttpAuthenticatedService} from "../../http-authenticated.service";
 
 @Component({
   selector: 'app-players',
@@ -10,9 +11,14 @@ import {Player} from "../../model/player";
 export class PlayersComponent implements OnInit {
 
   private players : [Player];
-  constructor(private service : PlayerApi) {}
+  private isAdmin : boolean;
+  constructor(
+    private service : PlayerApi,
+    private playerService : HttpAuthenticatedService
+  ) {}
 
   ngOnInit() {
+    this.isAdmin = this.playerService.isAdmin();
     this.service.PlayerGet()
       .subscribe(
       (result) => {

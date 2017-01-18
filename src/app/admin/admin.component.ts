@@ -3,6 +3,7 @@ import {HttpAuthenticatedService} from "../http-authenticated.service";
 import {PlayerApi} from "../services/PlayerApi";
 import {TournamentApi} from "../services/TournamentApi";
 import {RoleApi} from "../services/RoleApi";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -13,11 +14,18 @@ import {RoleApi} from "../services/RoleApi";
 export class AdminComponent implements OnInit {
 
   private isAdmin : boolean;
-  constructor(private auth: HttpAuthenticatedService) {
+  constructor(
+    private auth: HttpAuthenticatedService,
+    private router : Router
+  ) {
     this.isAdmin = this.auth.isAdmin();
   }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/']);
+  }
 }

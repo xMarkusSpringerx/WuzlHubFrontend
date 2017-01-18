@@ -5,6 +5,7 @@ import {TournamentApi} from "../../services/TournamentApi";
 import {Match} from "../../model/match";
 import {Tournament} from "../../model/tournament";
 import {CurrentStrengthApi} from "../../services/CurrentStrengthApi";
+import {HttpAuthenticatedService} from "../../http-authenticated.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,9 @@ export class DashboardComponent implements OnInit {
   private players : [any];
   private tournament = new Tournament;
   private currentMatches : [Match];
+  private loggedIn: boolean;
+
+  private noTournament : boolean = false;
 
   private chartOptions : Object;
   private playerData = [];
@@ -24,12 +28,17 @@ export class DashboardComponent implements OnInit {
   constructor(
     private playerService : PlayerApi,
     private tournamentService : TournamentApi,
-    private currentStrengthService : CurrentStrengthApi
+    private currentStrengthService : CurrentStrengthApi,
+    private authService : HttpAuthenticatedService
   ) {
 
   }
 
   ngOnInit() {
+
+    this.loggedIn = this.authService.loggedIn();
+    console.log("Is logged in? "+this.loggedIn);
+
     this.chartOptions = {
       title : { text : 'AAPL Stock Price' },
       series : [{
@@ -64,8 +73,17 @@ export class DashboardComponent implements OnInit {
 
     this.tournamentService.TournamentByDateGet(new Date().toDateString()).subscribe(
       (result) => {
-        this.tournament = result.tournament;
-        this.currentMatches = result.matchesInTournament;
+        if(result) {
+          this.tournament = result.tournament;
+
+          console.log(this.tournament);
+
+          this.currentMatches = result.matchesInTournament;
+        } else {
+          this.noTournament = true;
+
+        }
+
       },
       (error) => {
         console.log(error);

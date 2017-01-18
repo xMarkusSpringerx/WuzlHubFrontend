@@ -1,8 +1,10 @@
 <h1>Alle Tournaments</h1>
 
-<button class="btn btn-primary" [routerLink]="['./add']">
+<button *ngIf="isAdmin" class="btn btn-primary" [routerLink]="['./add']">
   <i class="glyphicon glyphicon-plus"></i> Hinzufügen
 </button>
+
+
 <table class="table table-inverse table-hover">
   <thead>
   <tr>
@@ -15,7 +17,7 @@
   <tr *ngFor="let tObj of tournaments; let i = index" [routerLink]="['./', tObj.tournament.id]">
     <td scope="rowi + 1">{{i+1}}</td>
     <td>{{tObj.tournament.name}}</td>
-    <td>{{tObj.tournament.date}}</td>
+    <td>{{tObj.tournament.date| amDateFormat:'LL'}}</td>
     <td></td>
   </tr>
   </tbody>

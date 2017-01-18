@@ -36,8 +36,8 @@
     </div>
     <div class="panel-footer">
       <div class="pull-right">
-        <div (click)="editPlayer()" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></div>
-        <div (click)="deletePlayer()" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></div>
+        <div *ngIf="isAdmin || username == player.userName" (click)="editPlayer()" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></div>
+        <div *ngIf="isAdmin" (click)="deletePlayer()" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></div>
       </div>
     </div>
 

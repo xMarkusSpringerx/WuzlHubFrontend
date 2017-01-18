@@ -22,6 +22,7 @@ import { PlayerAddComponent } from './admin/players/player-add/player-add.compon
 import { PlayerDetailComponent } from './admin/players/player-detail/player-detail.component';
 import {SimpleNotificationsModule} from "angular2-notifications";
 import { ChartModule } from 'angular2-highcharts';
+import {MomentModule} from 'angular2-moment';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -53,7 +54,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     WuHuWebAppRoutingModule,
     ReactiveFormsModule,
     SimpleNotificationsModule,
-    ChartModule
+    ChartModule,
+    MomentModule
   ],
   providers: [
     HttpAuthenticatedService,

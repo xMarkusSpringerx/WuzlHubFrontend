@@ -19,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pObj of players; let i = index" [routerLink]="['/admin/players', pObj.player.id]">
+      <tr *ngFor="let pObj of players; let i = index" [routerLink]="loggedIn ? ['/admin/players', pObj.player.id] : []">
         <td>{{i + 1}}</td>
         <td>{{pObj.player.firstName}}</td>
         <td>{{pObj.player.lastName}}</td>
@@ -31,34 +31,39 @@
 </div>
 
 
+<div *ngIf="noTournament">
+  <h1>Heute gibt es keine Tournaments</h1>
+</div>
 
-<h3>{{tournament.name}}</h3>
-<div class="row" *ngFor="let match of currentMatches">
-    <div class="col-md-4">
-      <div class="text-center">
-        <h3>Team 1</h3>
-        <div class="members">
-          {{match.team1.player1.player.userName}}<br />
-          {{match.team1.player2.player.userName}}<br />
-          {{match.match.goalsTeam1}}<br />
+<div *ngIf="noTournament == false">
+  <h3>{{tournament.name}}</h3>
+  <div class="row" *ngFor="let match of currentMatches">
+      <div class="col-md-4">
+        <div class="text-center">
+          <h3>Team 1</h3>
+          <div class="members">
+            {{match.team1.player1.player.userName}}<br />
+            {{match.team1.player2.player.userName}}<br />
+            {{match.match.goalsTeam1}}<br />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4" style="padding: 43px 0px;">
-      <div class="text-center">
-        <h4>vs.</h4>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="text-center">
-        <h3>Team 2</h3>
-        <div class="members">
-          {{match.team2.player1.player.userName}}<br />
-          {{match.team2.player2.player.userName}}<br />
-          {{match.match.goalsTeam2}}<br />
+      <div class="col-md-4" style="padding: 43px 0px;">
+        <div class="text-center">
+          <h4>vs.</h4>
         </div>
       </div>
-    </div>
+      <div class="col-md-4">
+        <div class="text-center">
+          <h3>Team 2</h3>
+          <div class="members">
+            {{match.team2.player1.player.userName}}<br />
+            {{match.team2.player2.player.userName}}<br />
+            {{match.match.goalsTeam2}}<br />
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
 
 
