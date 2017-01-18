@@ -8,6 +8,7 @@ import {Validators, FormBuilder} from "@angular/forms";
 import {AttendanceService} from "../../_shared/attendance.service";
 import {Role} from "../../../model/role";
 import {RoleApi} from "../../../services/RoleApi";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-player-detail',
@@ -62,7 +63,8 @@ export class PlayerDetailComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private attendanceService: AttendanceService,
-    private roleService : RoleApi
+    private roleService : RoleApi,
+    private _location: Location
   ) { }
 
 
@@ -101,10 +103,7 @@ export class PlayerDetailComponent implements OnInit {
       this.addForm.value.attendanceSaturday
     );
 
-
-
     p.picturePath="";
-
 
     console.log(p);
 
@@ -134,8 +133,6 @@ export class PlayerDetailComponent implements OnInit {
 
   }
 
-
-
   ngOnInit() {
     this.roleService.RoleGet().subscribe(
       (result) => {
@@ -144,7 +141,7 @@ export class PlayerDetailComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    )
+    );
 
     this.activatedRoute.params.subscribe(
       (param: any) => {
@@ -154,7 +151,12 @@ export class PlayerDetailComponent implements OnInit {
         this.playerService.PlayerByPlayerIdGet(playerId).subscribe(
           (result) => {
             this.player = result.player;
-            this.player.picturePath = environment.baseApiPath + this.player.picturePath;
+            if(this.player.picturePath != "") {
+              this.player.picturePath = environment.baseApiPath + this.player.picturePath;
+            } else {
+              this.player.picturePath = "./assets/images/avatar.jpeg";
+            }
+
             console.log(this.player);
 
           },
@@ -173,6 +175,24 @@ export class PlayerDetailComponent implements OnInit {
 
   fileChangeEvent(fileInput: any){
     this.fileToUpload = <File> fileInput.target.files[0];
+  }
+
+  deletePlayer() {
+    this.playerService.PlayerByPlayerIdDelete(this.player.id).subscribe(
+      (result) => {
+        console.log("Erfolgreich gelöscht");
+        this.alertService.success("Wuhu", "Erfolgreich gelöscht");
+        this.router.navigate(['/admin/players']);
+      },
+      (error) => {
+        console.log(error);
+        this.alertService.error("Error", "Eintrag konnte nicht gelöscht werden");
+      }
+    )
+  }
+
+  back(){
+    this._location.back();
   }
 
 }

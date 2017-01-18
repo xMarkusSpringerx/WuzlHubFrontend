@@ -42,6 +42,7 @@ export class MatchApi {
         if (basePath) {
             this.basePath = basePath;
         }
+        this.defaultHeaders.append("Content-Type", "application/json");
     }
 
     /**
@@ -50,7 +51,7 @@ export class MatchApi {
      * @param id
      * @param match
      */
-    public MatchByIdPut (id: number, match?: Match, extraHttpRequestParams?: any ) : Observable<{}> {
+    public MatchByIdPut (id: number, match?: Match, extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Match/{id}'
             .replace('{' + 'id' + '}', String(id));
 

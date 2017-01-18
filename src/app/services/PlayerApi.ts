@@ -71,7 +71,7 @@ export class PlayerApi {
       search: queryParameters
     };
 
-    return this.authHttp.request(path, requestOptions)
+    return this.http.request(path, requestOptions)
       .map((response: Response) => {
         if (response.status === 204) {
           return undefined;

@@ -1,17 +1,64 @@
-<h1>Dashboard</h1>
+<script src="../admin.component.ts"></script><h1>Dashboard</h1>
 
 <!--
+<chart id="chart" [options]="chartOptions"></chart>
+-->
 
-<div style="display: block;">
-  <canvas baseChart width="400" height="400"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Rangliste</div>
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Username</th>
+      <th>Stärke</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pObj of players; let i = index" [routerLink]="['/admin/players', pObj.player.id]">
+        <td>{{i + 1}}</td>
+        <td>{{pObj.player.firstName}}</td>
+        <td>{{pObj.player.lastName}}</td>
+        <td>{{pObj.player.userName}}</td>
+        <td>{{pObj.strength.strength}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
--->
+
+
+<h3>{{tournament.name}}</h3>
+<div class="row" *ngFor="let match of currentMatches">
+    <div class="col-md-4">
+      <div class="text-center">
+        <h3>Team 1</h3>
+        <div class="members">
+          {{match.team1.player1.player.userName}}<br />
+          {{match.team1.player2.player.userName}}<br />
+          {{match.match.goalsTeam1}}<br />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" style="padding: 43px 0px;">
+      <div class="text-center">
+        <h4>vs.</h4>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="text-center">
+        <h3>Team 2</h3>
+        <div class="members">
+          {{match.team2.player1.player.userName}}<br />
+          {{match.team2.player2.player.userName}}<br />
+          {{match.match.goalsTeam2}}<br />
+        </div>
+      </div>
+    </div>
+</div>
+
+

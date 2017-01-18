@@ -1,3 +1,38 @@
-<p>
-  tournament-detail works!
-</p>
+<h1>{{tournament.name}}</h1>
+
+<br />
+<h3>Matches:</h3>
+<div class="row" *ngFor="let match of matches">
+  <form [formGroup]="addGoals" (ngSubmit)="submitGoals(match)">
+  <div class="col-md-4">
+    <div class="text-center">
+      <h3>Team 1</h3>
+      <div class="members">
+        {{match.team1.player1.player.userName}}<br />
+        {{match.team1.player2.player.userName}}<br />
+        {{match.match.goalsTeam1}}<br />
+        <input *ngIf="match.match.hasEnded == false" type="text" formControlName="goalsTeam1"/>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" style="padding: 43px 0px;">
+    <div class="text-center">
+        <h4>vs.</h4>
+      <button *ngIf="match.match.hasEnded == false" type="submit" class="btn btn-default">Ergebnis eintragen</button>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="text-center">
+      <h3>Team 2</h3>
+      <div class="members">
+        {{match.team2.player1.player.userName}}<br />
+        {{match.team2.player2.player.userName}}<br />
+        {{match.match.goalsTeam2}}<br />
+
+        <input *ngIf="match.match.hasEnded == false" type="text" formControlName="goalsTeam2"/>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+

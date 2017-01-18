@@ -1,4 +1,7 @@
+
+
 <div *ngIf="editModus == false" class="col-md-12 col-lg-12  toppad">
+
   <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title">{{player.firstName}} {{player.lastName}}</h3>
@@ -24,7 +27,6 @@
               <td>Rolle</td>
               <td>{{player.roleId}}</td>
             </tr>
-
             </tbody>
           </table>
 
@@ -35,14 +37,12 @@
     <div class="panel-footer">
       <div class="pull-right">
         <div (click)="editPlayer()" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></div>
-        <div class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></div>
+        <div (click)="deletePlayer()" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></div>
       </div>
     </div>
 
   </div>
 </div>
-
-
 
 
 <form class="form-horizontal" [formGroup]="addForm" (ngSubmit)="updatePlayer($event)" *ngIf="editModus">
@@ -142,3 +142,12 @@
     </div>
   </div>
 </form>
+
+
+<div class="row">
+  <div class="col-md-12 col-lg-12  toppad">
+    <button class="btn btn-primary" (click)="back()">
+      <i class="glyphicon glyphicon-chevron-left"></i> Zurück
+    </button>
+  </div>
+</div>

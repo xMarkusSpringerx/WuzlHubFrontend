@@ -1,11 +1,12 @@
+import {Team} from "./team";
 export class Match {
   id?: number;
 
   tournamentId?: number;
 
-  team1Id?: number;
+  team1?: Team;
 
-  team2Id?: number;
+  team2?: Team;
 
   startDateTime?: Date;
 

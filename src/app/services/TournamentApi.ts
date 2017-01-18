@@ -42,6 +42,7 @@ export class TournamentApi {
         if (basePath) {
             this.basePath = basePath;
         }
+        this.defaultHeaders.append("Content-Type", "application/json");
     }
 
     /**
@@ -49,7 +50,7 @@ export class TournamentApi {
      *
      * @param id
      */
-    public TournamentByIdGet (id: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public TournamentByIdGet (id: number, extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Tournament/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -74,6 +75,34 @@ export class TournamentApi {
                 }
             });
     }
+
+
+
+  public TournamentByDateGet (date : string, extraHttpRequestParams?: any ) {
+    const path = this.basePath + '/api/Tournament/findbydate/{date}'
+        .replace('{' + 'date' + '}', String(date));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    // verify required parameter 'id' is not null or undefined
+    if (date === null || date === undefined) {
+      throw new Error('Required parameter id was null or undefined when calling apiTournamentByIdGet.');
+    }
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
+
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
+        }
+      });
+  }
 
     /**
      *
@@ -237,7 +266,7 @@ export class TournamentApi {
      *
      * @param tournament
      */
-    public TournamentPost (tournament?: Tournament, extraHttpRequestParams?: any ) : Observable<{}> {
+    public TournamentPost (tournament?: Tournament, extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Tournament';
 
         let queryParameters = new URLSearchParams();

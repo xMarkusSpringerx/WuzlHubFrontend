@@ -1,7 +1,8 @@
+import {Player} from "./player";
 export class Team {
   id?: number;
 
-  player1Id?: number;
+  player1?: Player;
 
-  player2Id?: number;
+  player2?: Player;
 }
