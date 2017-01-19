@@ -10,6 +10,8 @@ import {HttpAuthenticatedService} from "../../http-authenticated.service";
 })
 export class TournamentsComponent implements OnInit {
 
+  public isRequesting: boolean;
+
   private tournaments : [any];
   private isAdmin : boolean;
   constructor(
@@ -18,7 +20,7 @@ export class TournamentsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.isRequesting = true;
     this.isAdmin = this.playerService.isAdmin();
 
     this.service.TournamentGet()
@@ -30,6 +32,8 @@ export class TournamentsComponent implements OnInit {
           });
 
 
+          this.isRequesting = false;
+
         },
         (error) => {
           console.log(error);
@@ -37,6 +41,20 @@ export class TournamentsComponent implements OnInit {
       );
 
 
+  }
+
+  private getActiveTournamentStyle(tournament) {
+
+    var inDate = new Date(tournament.date);
+    var actDate = new Date();
+
+    if(
+      inDate.getDate() == actDate.getDate() &&
+      inDate.getMonth() == actDate.getMonth() &&
+      inDate.getFullYear() == actDate.getFullYear()
+    ) {
+      return "lightyellow";
+    }
   }
 
 }

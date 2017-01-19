@@ -1,7 +1,7 @@
 <script src="../admin.component.ts"></script><h1>Dashboard</h1>
 
 <div style="width: 100%;">
-<chart id="chart" [options]="chartOptions" (load)="generateChart($event)"></chart>
+  <chart id="chart" [options]="chartOptions" (load)="generateChart($event)"></chart>
 </div>
 
 <div class="panel panel-default">
@@ -19,13 +19,13 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pObj of players; let i = index" [routerLink]="loggedIn ? ['/admin/players', pObj.player.id] : []">
-        <td>{{i + 1}}</td>
-        <td>{{pObj.player.firstName}}</td>
-        <td>{{pObj.player.lastName}}</td>
-        <td>{{pObj.player.userName}}</td>
-        <td>{{pObj.strength.strength}}</td>
-      </tr>
+    <tr *ngFor="let pObj of players; let i = index" [routerLink]="loggedIn ? ['/admin/players', pObj.player.id] : []">
+      <td>{{i + 1}}</td>
+      <td>{{pObj.player.firstName}}</td>
+      <td>{{pObj.player.lastName}}</td>
+      <td>{{pObj.player.userName}}</td>
+      <td>{{pObj.strength.strength}}</td>
+    </tr>
     </tbody>
   </table>
 </div>
@@ -35,34 +35,45 @@
 </div>
 
 <div *ngIf="noTournament == false">
-  <h3>{{tournament.name}}</h3>
+  <h3>Aktuelles Tournament: {{tournament.name}}</h3>
+
   <div class="row" *ngFor="let match of currentMatches">
+
       <div class="col-md-4">
         <div class="text-center">
           <h3>Team 1</h3>
           <div class="members">
-            {{match.team1.player1.player.userName}}<br />
-            {{match.team1.player2.player.userName}}<br />
-            {{match.match.goalsTeam1}}<br />
+            {{match.team1.player1.player.userName}}<br/>
+            {{match.team1.player2.player.userName}}<br/>
           </div>
         </div>
       </div>
-      <div class="col-md-4" style="padding: 43px 0px;">
+
+      <div class="col-md-1 text-center" style="margin-top: 24px;">
+        <h1>{{match.match.goalsTeam1}}</h1>
+      </div>
+      <div class="col-md-2" style="padding: 43px 0px;">
         <div class="text-center">
           <h4>vs.</h4>
         </div>
+      </div>
+      <div class="col-md-1 text-center" style="margin-top: 24px;">
+        <h1>{{match.match.goalsTeam2}}</h1>
       </div>
       <div class="col-md-4">
         <div class="text-center">
           <h3>Team 2</h3>
           <div class="members">
-            {{match.team2.player1.player.userName}}<br />
-            {{match.team2.player2.player.userName}}<br />
-            {{match.match.goalsTeam2}}<br />
+            {{match.team2.player1.player.userName}}<br/>
+            {{match.team2.player2.player.userName}}<br/>
           </div>
         </div>
       </div>
+
+      <hr style="width: 100%"/>
   </div>
+
+
 </div>
 
 

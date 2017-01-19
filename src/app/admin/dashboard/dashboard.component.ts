@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import {PlayerApi} from "../../services/PlayerApi";
 import {Player} from "../../model/player";
 import {TournamentApi} from "../../services/TournamentApi";
@@ -14,7 +14,10 @@ import {Observable} from "rxjs";
   styleUrls: ['./dashboard.component.css'],
   providers: [PlayerApi, TournamentApi, CurrentStrengthApi]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.timerSubscription.unsubscribe();
+  }
 
   private players: [any];
   private tournament = new Tournament;
@@ -34,6 +37,8 @@ export class DashboardComponent implements OnInit {
               private currentStrengthService: CurrentStrengthApi,
               private authService: HttpAuthenticatedService) {
   }
+
+  private timerSubscription;
 
   private generateChart(event){
     this.chartObj = event.context;
@@ -78,7 +83,7 @@ export class DashboardComponent implements OnInit {
       );
 
     let timer = Observable.timer(0,1000);
-    timer.subscribe(t=> {
+    this.timerSubscription = timer.subscribe(t=> {
 
       console.log("Fetch new data");
 
@@ -130,7 +135,6 @@ export class DashboardComponent implements OnInit {
           console.log(error);
         }
       );
-
   }
 
   setChartOptions() {
@@ -166,4 +170,6 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+
 }

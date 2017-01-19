@@ -12,6 +12,7 @@ import {TournamentAddComponent} from "./admin/tournaments/tournament-add/tournam
 import {TournamentDetailComponent} from "./admin/tournaments/tournament-detail/tournament-detail.component";
 import {PlayerDetailComponent} from "./admin/players/player-detail/player-detail.component";
 import {PlayerAddComponent} from "./admin/players/player-add/player-add.component";
+import {YourMatchesComponent} from "./admin/your-matches/your-matches.component";
 
 const routes: Routes = [
 
@@ -47,7 +48,10 @@ const routes: Routes = [
       { path: 'tournaments/add',
         component: TournamentAddComponent},
       { path: 'tournaments/:tournamentId',
-        component: TournamentDetailComponent}
+        component: TournamentDetailComponent},
+
+      { path: 'mymatches',
+        component: YourMatchesComponent},
     ]
   },
   /* DEFAULT */

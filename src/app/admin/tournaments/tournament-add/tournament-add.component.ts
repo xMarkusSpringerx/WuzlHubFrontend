@@ -72,8 +72,6 @@ export class TournamentAddComponent implements OnInit {
       }
     }
 
-    console.log(playerIds);
-
     this.tournamentService.TournamentPost(tournament).subscribe(
       (result) => {
         var tournament = result.tournament;
@@ -86,7 +84,7 @@ export class TournamentAddComponent implements OnInit {
                 this.notificationService.success("Wuhu", "Tournament erfolgreich hinzugefügt");
               },
               (error) => {
-                this.notificationService.error("Hmm", "Es gab ein Problem.");
+                this.notificationService.error("Hmm", error._body);
               }
             )
           },

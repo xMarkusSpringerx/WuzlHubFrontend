@@ -23,6 +23,8 @@ import { PlayerDetailComponent } from './admin/players/player-detail/player-deta
 import {SimpleNotificationsModule} from "angular2-notifications";
 import { ChartModule } from 'angular2-highcharts';
 import {MomentModule} from 'angular2-moment';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { YourMatchesComponent } from './admin/your-matches/your-matches.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -45,7 +47,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TournamentDetailComponent,
     TournamentAddComponent,
     PlayerAddComponent,
-    PlayerDetailComponent
+    PlayerDetailComponent,
+    SpinnerComponent,
+    YourMatchesComponent
   ],
   imports: [
     BrowserModule,

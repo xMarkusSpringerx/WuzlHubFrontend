@@ -1,40 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import {Tournament} from "../../../model/tournament";
-import {TournamentApi} from "../../../services/TournamentApi";
-import {ActivatedRoute} from "@angular/router";
-import {Match} from "../../../model/match";
+import {MatchApi} from "../../services/MatchApi";
+import {PlayerApi} from "../../services/PlayerApi";
+import {HttpAuthenticatedService} from "../../http-authenticated.service";
 import {Validators, FormBuilder} from "@angular/forms";
-import {MatchApi} from "../../../services/MatchApi";
-import {HttpAuthenticatedService} from "../../../http-authenticated.service";
-import {LiveResultApi} from "../../../services/LiveResultApi";
-import {LiveResult} from "../../../model/live-result";
+import {LiveResult} from "../../model/live-result";
+import {TournamentApi} from "../../services/TournamentApi";
+import {ActivatedRoute} from "@angular/router";
+import {LiveResultApi} from "../../services/LiveResultApi";
 
 @Component({
-  selector: 'app-tournament-detail',
-  templateUrl: './tournament-detail.component.html',
-  styleUrls: ['./tournament-detail.component.css'],
-  providers: [TournamentApi, MatchApi, HttpAuthenticatedService, LiveResultApi]
+  selector: 'app-your-matches',
+  templateUrl: './your-matches.component.html',
+  styleUrls: ['./your-matches.component.css'],
+  providers: [MatchApi, LiveResultApi, TournamentApi, PlayerApi]
 })
-export class TournamentDetailComponent implements OnInit {
-
-  private tournament : Tournament = new Tournament;
-  private matches : [Match];
-  private isAdmin : boolean;
+export class YourMatchesComponent implements OnInit {
+  private matches;
 
   constructor(
+    private matchService : MatchApi,
+    private playerService : PlayerApi,
+    private authService : HttpAuthenticatedService,
     private tournamentService : TournamentApi,
     private activatedRoute : ActivatedRoute,
     public fb: FormBuilder,
-    private matchService : MatchApi,
-    private liveResultService : LiveResultApi,
-    private authService : HttpAuthenticatedService
+    private liveResultService : LiveResultApi
   ) { }
 
   public addGoals = this.fb.group({
     goalsTeam1: ["", Validators.required],
     goalsTeam2: ["", Validators.required]
   });
-
 
   submitGoals(match) {
 
@@ -91,23 +87,23 @@ export class TournamentDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isAdmin = this.authService.isAdmin();
-    this.activatedRoute.params.subscribe(
-      (param: any) => {
-        let tournamentId = param['tournamentId'];
-
-        this.tournamentService.TournamentByIdGet(tournamentId).subscribe(
+    this.playerService.PlayerFindbyusernameByUsernameGet(this.authService.getLoggedInUsername()).subscribe(
+      (result) => {
+        this.matchService.MatchFindByPlayerGet(result.id).subscribe(
           (result) => {
-            this.tournament = result.tournament;
-            this.matches = result.matchesInTournament;
-
+            console.log(result);
+            this.matches = result;
           },
           (error) => {
-            console.log(error);
+
           }
         )
+      },
+      (error) => {
+
       }
     );
+
   }
 
   private userPlaysInMatch(match) {

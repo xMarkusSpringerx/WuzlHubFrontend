@@ -196,6 +196,28 @@ export class MatchApi {
             });
     }
 
+
+  public MatchFindByPlayerGet (playerId, extraHttpRequestParams?: any ) {
+    const path = this.basePath + '/api/Match/findbyplayer/{playerId}'
+        .replace('{' + 'playerId' + '}', String(playerId));
+
+    let queryParameters = new URLSearchParams();
+    let headerParams = this.defaultHeaders;
+    let requestOptions: RequestOptionsArgs = {
+      method: 'GET',
+      headers: headerParams,
+      search: queryParameters
+    };
+
+    return this.http.request(path, requestOptions)
+      .map((response: Response) => {
+        if (response.status === 204) {
+          return undefined;
+        } else {
+          return response.json();
+        }
+      });
+  }
     /**
      *
      *
