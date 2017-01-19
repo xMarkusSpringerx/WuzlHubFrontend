@@ -1,8 +1,8 @@
 <script src="../admin.component.ts"></script><h1>Dashboard</h1>
 
-<!--
-<chart id="chart" [options]="chartOptions"></chart>
--->
+<div style="width: 100%;">
+<chart id="chart" [options]="chartOptions" (load)="generateChart($event)"></chart>
+</div>
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
@@ -29,7 +29,6 @@
     </tbody>
   </table>
 </div>
-
 
 <div *ngIf="noTournament">
   <h1>Heute gibt es keine Tournaments</h1>
