@@ -25,13 +25,23 @@
             </tr>
             <tr>
               <td>Rolle</td>
-              <td>{{player.roleId}}</td>
+              <td>{{playerRoleName}}</td>
+            </tr>
+            <tr>
+              <td>Anwesenheit</td>
+              <td>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceMonday }">Montag</button>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceTuesday }">Dienstag</button>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceWednesday }">Mittwoch</button>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceThursday }">Donnerstag</button>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceFriday }">Freitag</button>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceSaturday }">Samstag</button>
+                <button [ngClass]="{'active_attendance': detailAttendancePlayer.attendanceSunday }">Sonntag</button>
+              </td>
             </tr>
             </tbody>
           </table>
-
         </div>
-
       </div>
     </div>
     <div class="panel-footer">
@@ -42,6 +52,11 @@
     </div>
 
   </div>
+
+  <div style="width: 100%;">
+    <chart id="chart" [options]="chartOptions" (load)="generateChart($event)"></chart>
+  </div>
+
 </div>
 
 

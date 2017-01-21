@@ -10,12 +10,13 @@ import {Role} from "../../../model/role";
 import {RoleApi} from "../../../services/RoleApi";
 import {Location} from '@angular/common';
 import {HttpAuthenticatedService} from "../../../http-authenticated.service";
+import {CurrentStrengthApi} from "../../../services/CurrentStrengthApi";
 
 @Component({
   selector: 'app-player-detail',
   templateUrl: './player-detail.component.html',
   styleUrls: ['./player-detail.component.css'],
-  providers: [AttendanceService]
+  providers: [AttendanceService, CurrentStrengthApi]
 })
 export class PlayerDetailComponent implements OnInit {
 
@@ -26,8 +27,26 @@ export class PlayerDetailComponent implements OnInit {
   private username : string;
 
   private roles : [Role];
+  private playerRoleName = "";
+
+
+  private chartObj;
+  private chartOptions;
+  private generateChart(event){
+    this.chartObj = event.context;
+  }
 
   private edit_attendance = {
+    attendanceMonday: false,
+    attendanceTuesday: false,
+    attendanceWednesday: false,
+    attendanceThursday: false,
+    attendanceFriday: false,
+    attendanceSaturday: false,
+    attendanceSunday: false
+  };
+
+  private detailAttendancePlayer = {
     attendanceMonday: false,
     attendanceTuesday: false,
     attendanceWednesday: false,
@@ -69,7 +88,8 @@ export class PlayerDetailComponent implements OnInit {
     private attendanceService: AttendanceService,
     private roleService : RoleApi,
     private _location: Location,
-    private adminService : HttpAuthenticatedService
+    private adminService : HttpAuthenticatedService,
+    private currentStrengthService : CurrentStrengthApi
   ) { }
 
 
@@ -139,6 +159,16 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.chartOptions = {
+      chart: {
+        zoomType: "x"
+      },
+      title: {text: 'Statistiken'},
+      series: []
+    };
+
+
     this.isAdmin = this.adminService.isAdmin();
     this.username = this.adminService.getLoggedInUsername();
 
@@ -165,8 +195,40 @@ export class PlayerDetailComponent implements OnInit {
               this.player.picturePath = "./assets/images/avatar.jpeg";
             }
 
-            console.log(this.player);
+            this.detailAttendancePlayer = this.attendanceService.NumberToAttendance(this.player.attendance);
+            console.log("Anwesenheit:");
+            console.log(this.detailAttendancePlayer);
 
+
+            this.roleService.RoleByRoleIdGet(this.player.roleId).subscribe(
+              (result) => {
+                this.playerRoleName = result.name;
+              },
+              (error) => {
+
+              }
+            )
+
+            this.currentStrengthService.CurrentStrengthFindallbyplayerByPlayerIdGet(this.player.id).subscribe(
+              (result) => {
+                var data = [];
+                for (var singleRes in result) {
+                  data.push(result[singleRes].strength);
+                }
+
+                var options = {
+                  name: this.player.userName,
+                  data: data
+                };
+
+                //this.playerData.push(options);
+
+                this.chartObj.addSeries(options);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
           },
           (error) => {
             this.alertService.alert("Fehler", "Eintrag konnte nicht geladen werden");

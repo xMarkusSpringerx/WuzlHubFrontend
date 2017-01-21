@@ -91,21 +91,20 @@ export class PlayerAddComponent implements OnInit {
         console.log("playerpost");
         console.log(result);
 
-        this.playerService.UploadProfilePic(result.id, this.fileToUpload).subscribe(
-          (result) => {
-            console.log("profilepic");
-            console.log(result);
-            this._service.success("Wohho", "Player erfolgreich angelegt");
-            this.router.navigate(['/admin/players'])
-          },
-          (error) => {
-            this._service.error("Fehler", "Es fehlen Felder oder der Username ist schon vorhanden");
-            console.log(error);
-          }
-        )
-
+        if(this.fileToUpload) {
+          this.playerService.UploadProfilePic(result.id, this.fileToUpload).subscribe(
+            (result) => {
+              console.log("profilepic");
+              console.log(result);
+            }
+          )
+        } else {
+          this._service.success("Wohho", "Player erfolgreich angelegt");
+          this.router.navigate(['/admin/players'])
+        }
       },
       (error) => {
+        this._service.error("Fehler", "Es fehlen Felder oder der Username ist schon vorhanden");
         console.log(error);
       }
     );

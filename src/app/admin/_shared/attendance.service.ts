@@ -56,31 +56,31 @@ export class AttendanceService {
 
     var temp_attendance = attendance;
 
-    if ((temp_attendance - 64) > 0) {
+    if ((temp_attendance - 64) >= 0) {
       result.attendanceMonday = true;
       temp_attendance -= 64;
     }
-    if ((temp_attendance - 32) > 0) {
+    if ((temp_attendance - 32) >= 0) {
       result.attendanceTuesday = true;
       temp_attendance -= 32;
     }
-    if ((temp_attendance - 16) > 0) {
+    if ((temp_attendance - 16) >= 0) {
       result.attendanceWednesday = true;
       temp_attendance -= 16;
     }
-    if ((temp_attendance - 8) > 0) {
+    if ((temp_attendance - 8) >= 0) {
       result.attendanceThursday = true;
       temp_attendance -= 8;
     }
-    if ((temp_attendance - 4) > 0) {
+    if ((temp_attendance - 4) >= 0) {
       result.attendanceFriday = true;
       temp_attendance -= 4;
     }
-    if ((temp_attendance - 2) > 0) {
+    if ((temp_attendance - 2) >= 0) {
       result.attendanceSaturday = true;
       temp_attendance -= 2;
     }
-    if ((temp_attendance - 1) > 0) {
+    if ((temp_attendance - 1) >= 0) {
       result.attendanceSunday = true;
 
     }

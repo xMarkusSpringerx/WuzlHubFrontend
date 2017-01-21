@@ -1,3 +1,10 @@
 .panel-footer{
   height: 51px;
 }
+
+button {
+  border: none;
+}
+.active_attendance {
+  background: lightgreen;
+}

@@ -48,7 +48,7 @@ export class RoleApi {
      *
      * @param roleId
      */
-    public RoleByRoleIdGet (roleId: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public RoleByRoleIdGet (roleId: number, extraHttpRequestParams?: any ) {
         const path = this.basePath + '/api/Role/{roleId}'
             .replace('{' + 'roleId' + '}', String(roleId));
 
