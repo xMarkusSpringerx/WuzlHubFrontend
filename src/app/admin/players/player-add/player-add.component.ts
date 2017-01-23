@@ -98,10 +98,9 @@ export class PlayerAddComponent implements OnInit {
               console.log(result);
             }
           )
-        } else {
-          this._service.success("Wohho", "Player erfolgreich angelegt");
-          this.router.navigate(['/admin/players'])
         }
+        this._service.success("Wohho", "Player erfolgreich angelegt");
+        this.router.navigate(['/admin/players'])
       },
       (error) => {
         this._service.error("Fehler", "Es fehlen Felder oder der Username ist schon vorhanden");

@@ -84,8 +84,6 @@ export class AttendanceService {
       result.attendanceSunday = true;
 
     }
-    console.log(attendance);
-    console.log(result);
     return result;
   }
 

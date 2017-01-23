@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
 
     children: [
       /* map default admin path to dashboard */
